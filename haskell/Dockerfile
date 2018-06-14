@@ -1,6 +1,7 @@
-FROM build-env
+FROM debian:9.4
 
-RUN apt-get install -y curl
+RUN apt-get update
+RUN apt-get install -y build-essential curl
 RUN curl -sSL https://get.haskellstack.org/ | sh
 RUN stack update
 RUN stack setup
@@ -8,4 +9,7 @@ RUN stack setup
 RUN stack ghc || true
 
 VOLUME /root/.stack/
-WORKDIR /src
+VOLUME /workspace/
+
+WORKDIR /workspace
+
